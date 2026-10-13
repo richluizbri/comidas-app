@@ -4,13 +4,14 @@ const { conectar } = require('./db');
 const comidas = require('./routes/comidas');
 
 const app = express();
+const api = express.Router();
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
+api.get('/health', (req, res) => res.json({ status: 'ok' }));
 
-app.use('/api', async (req, res, next) => {
+api.use(async (req, res, next) => {
   try {
     await conectar();
     next();
@@ -19,9 +20,12 @@ app.use('/api', async (req, res, next) => {
   }
 });
 
-app.use('/api/comidas', comidas);
+api.use('/comidas', comidas);
 
-app.use((req, res) => res.status(404).json({ erro: 'rota não encontrada' }));
+app.use('/api', api);
+app.use('/', api);
+
+app.use((req, res) => res.status(404).json({ erro: 'rota não encontrada', rota: req.originalUrl }));
 
 app.use((err, req, res, next) => {
   if (err.type === 'entity.parse.failed') return res.status(400).json({ erro: 'JSON inválido' });
