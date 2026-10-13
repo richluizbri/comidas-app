@@ -1,6 +1,6 @@
 const API_URL = ['localhost', '127.0.0.1'].includes(location.hostname)
   ? 'http://localhost:3000/api'
-    : 'https://comidas-app-liard.vercel.app/api';
+      : 'https://comidas-app-five.vercel.app/api';
 
 const $ = s => document.querySelector(s);
 const lista = $('#lista');
