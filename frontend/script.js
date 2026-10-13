@@ -1,7 +1,7 @@
 const API_URL = ['localhost', '127.0.0.1'].includes(location.hostname)
   ? 'http://localhost:3000/api'
   : 'https://comidas-app-five.vercel.app/api';
-  
+
 const $ = s => document.querySelector(s);
 const lista = $('#lista');
 const status = $('#status');
@@ -21,8 +21,8 @@ let timer;
 
 async function api(caminho = '', opcoes = {}) {
   const res = await fetch(`${API_URL}/comidas${caminho}`, {
-    headers: { 'Content-Type': 'application/json' },
-    ...opcoes
+    ...opcoes,
+    headers: opcoes.body ? { 'Content-Type': 'application/json' } : {}
   });
   const dados = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(dados.erro || `Erro ${res.status}`);
