@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cardápio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo__inner">
+      <div>
+        <p class="topo__selo">Despensa · Mercearia</p>
+        <h1>Cardápio</h1>
+        <p class="topo__sub">Cadastre e consulte os produtos da casa.</p>
+      </div>
+      <button class="btn btn--primario" id="btnNovo">+ Nova comida</button>
+    </div>
+  </header>
+
+  <main class="conteudo">
+    <div class="barra">
+      <input type="search" id="busca" placeholder="Buscar por nome ou marca…" aria-label="Buscar">
+      <span id="contador" class="contador"></span>
+    </div>
+
+    <p id="status" class="status" role="status"></p>
+    <section id="lista" class="grade" aria-live="polite"></section>
+  </main>
+
+  <dialog id="modal" class="modal">
+    <form id="form" method="dialog" novalidate>
+      <h2 id="modalTitulo">Nova comida</h2>
+      <input type="hidden" id="id">
+      <label>Marca<input id="marca" required minlength="2" maxlength="60"></label>
+      <label>Nome<input id="nome" required minlength="2" maxlength="80"></label>
+      <label>Preço (R$)<input id="preco" type="number" step="0.01" min="0" required></label>
+      <label>URL da foto<input id="foto" type="url" required placeholder="https://…"></label>
+      <img id="preview" class="preview" alt="" hidden>
+      <p id="erroForm" class="erro" role="alert"></p>
+      <div class="modal__acoes">
+        <button type="button" class="btn" id="btnCancelar">Cancelar</button>
+        <button type="submit" class="btn btn--primario" id="btnSalvar">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <template id="tplCard">
+    <article class="card">
+      <div class="card__foto"><img loading="lazy" alt=""></div>
+      <div class="card__corpo">
+        <span class="card__marca"></span>
+        <h3 class="card__nome"></h3>
+        <div class="card__rodape">
+          <strong class="card__preco"></strong>
+          <div class="card__acoes">
+            <button class="icone" data-acao="editar" aria-label="Editar">✎</button>
+            <button class="icone icone--perigo" data-acao="excluir" aria-label="Excluir">✕</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
