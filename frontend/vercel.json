@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://comidas-app-nu.vercel.app/api/:path*" }
+    { "source": "/api/:path*", "destination": "https://cardapio-api-nine.vercel.app/api/:path*" }
   ]
 }
